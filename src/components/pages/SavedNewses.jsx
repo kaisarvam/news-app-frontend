@@ -3,6 +3,7 @@ import {
     Typography,
   } from "@mui/material";
   import React, { useEffect } from "react";
+import NewsCard from "../Elements/NewsCard";
 
 import NewsCardForSaved from "../Elements/NewsCardForSaved";
   
@@ -16,7 +17,7 @@ import NewsCardForSaved from "../Elements/NewsCardForSaved";
               savedNewses?.map((article, index) => {
                 return (
                   <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={index}>
-                   <NewsCardForSaved article={article} setSavedNewses={setSavedNewses} savedNewses={savedNewses} />
+                   <NewsCard article={article} setSavedNewses={setSavedNewses} savedNewses={savedNewses} />
                   </Grid>
                 );
               })}
