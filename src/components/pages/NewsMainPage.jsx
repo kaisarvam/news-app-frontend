@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import PropTypes from "prop-types";
@@ -54,7 +54,7 @@ export default function NewsMainPage() {
   const [apiSwitch, setApiSwitch] = useState(true);
   const [value, setValue] = useState(0);
   const [Newses, setNewses] = useState([]);
-  const [savedNewses,setSavedNewses] = useState([]);
+  const [savedNewses,setAllSavedNewses] = useState([]);
   const [searchText, setSearchtext] = useState("");
   const [searchFieldValue, setSearchFieldValue] = useState("");
   const [country, setCountry] = useState("");
@@ -67,7 +67,16 @@ export default function NewsMainPage() {
     setSearchFieldValue(e.target.value);
   };
 
-  //   useEffect(() => {}, [searchText]);
+  const setSavedNewses =(values)=>{
+    setAllSavedNewses(values);
+    localStorage.setItem("savedNewses",JSON.stringify(values));
+  }
+    useEffect(() => {
+        const localStorageNewses = JSON.parse(localStorage.getItem("savedNewses"));
+        console.log("local :",localStorageNewses,"state:",savedNewses);
+        console.log("is equal",(JSON.stringify(localStorageNewses)===JSON.stringify(savedNewses)))
+       setAllSavedNewses([...localStorageNewses]);
+    }, [Newses]);
 
   useQuery(
     ["getAllNews", searchText, apiSwitch],
@@ -227,6 +236,8 @@ export default function NewsMainPage() {
             Newses={Newses}
             fetchMoreData={fetchMoreData}
             totalResults={totalResults}
+            setSavedNewses={setSavedNewses}
+            savedNewses={savedNewses}
           />
         </TabPanel>
         <TabPanel value={value} index={4}>

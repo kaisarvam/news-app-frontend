@@ -40,9 +40,9 @@ function NewsCard({ article, setSavedNewses, savedNewses }) {
       />
     <Card sx={{ maxWidth: 400, paddingBottom: "20px" }}>
       <CardHeader
-        action={(savedNewses.includes(article))?<BookmarkAddedIcon onClick={()=>{
+        action={(JSON.stringify(savedNewses).includes(JSON.stringify(article)))?<BookmarkAddedIcon onClick={()=>{
             const filteredNewses = savedNewses.filter((newsArticle)=>{
-                return(newsArticle!==article);
+                return(JSON.stringify(newsArticle)!==JSON.stringify(article));
             })
             console.log("filtered newses :",filteredNewses);
             setSavedNewses(filteredNewses);
