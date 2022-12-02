@@ -1,4 +1,5 @@
 import {
+  Container,
   Grid,
   Typography,
 } from "@mui/material";
@@ -12,7 +13,7 @@ import NewsCard from "../Elements/NewsCard";
 function BusinessNews({ Newses, fetchMoreData, totalResults,setSavedNewses,savedNewses }) {
   useEffect(() => {}, [Newses]);
   return (
-   <>
+    <Container maxWidth="xl" style={{ backgroundColor: "#F5EBE0" }}>
       <InfiniteScroll
         style={{ width: "100%" }}
         dataLength={Newses.length}
@@ -40,7 +41,7 @@ function BusinessNews({ Newses, fetchMoreData, totalResults,setSavedNewses,saved
           </Grid>
         </Grid>
       )}
-    </>
+    </Container>
   );
 }
 

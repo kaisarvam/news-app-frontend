@@ -1,4 +1,5 @@
 import {
+    Container,
     Grid,
     Typography,
   } from "@mui/material";
@@ -10,7 +11,7 @@ import NewsCardForSaved from "../Elements/NewsCardForSaved";
   function SavedNewses({ savedNewses ,setSavedNewses}) {
     useEffect(() => {}, [savedNewses]);
     return (
-     <>
+        <Container maxWidth="xl" style={{ backgroundColor: "#F5EBE0" }}>
        
           <Grid container spacing={4}>
             {savedNewses &&
@@ -30,7 +31,7 @@ import NewsCardForSaved from "../Elements/NewsCardForSaved";
             </Grid>
           </Grid>
         )}
-      </>
+      </Container>
     );
   }
   

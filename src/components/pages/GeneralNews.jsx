@@ -8,7 +8,7 @@ import NewsCard from "../Elements/NewsCard";
 function GeneralNews({ Newses, fetchMoreData, totalResults,setSavedNewses,savedNewses }) {
   useEffect(() => {}, [Newses]);
   return (
-    <Container style={{ backgroundColor: "#F5EBE0" }}>
+    <Container maxWidth="xl" style={{ backgroundColor: "#F5EBE0" }}>
       <InfiniteScroll
         style={{ width: "100%" }}
         dataLength={Newses.length}
