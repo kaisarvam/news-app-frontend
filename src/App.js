@@ -1,21 +1,18 @@
-import { Container } from "@mui/system";
 import { QueryClient, QueryClientProvider } from "react-query";
 import "./App.css";
-import LayoutWrapper from "./components/Elements/Layout/LayoutWrapper";
-import NewsMainPage from "./components/pages/NewsMainPage";
+import FireBaseApp from "./utils/FireBase/firebase.init";
+import { getAuth } from "firebase/auth";
+import NewsPageHome from "./components/pages/NewsPageHome";
+
+//const auth = getAuth(FireBaseApp);
+//console.log("found auth :",auth)
 
 const queryClient = new QueryClient();
 
 function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <LayoutWrapper>
-        <Container maxWidth="xl" sx={{ backgroundColor: "#F5EBE0" }}>
-          <NewsMainPage />
-        </Container>
-      </LayoutWrapper>
-    </QueryClientProvider>
-  );
+  return <QueryClientProvider client={queryClient}>
+    <NewsPageHome/>
+  </QueryClientProvider>;
 }
 
 export default App;

@@ -42,7 +42,7 @@ function NewsCardForSaved({ article, setSavedNewses, savedNewses }) {
             const filteredNewses = savedNewses.filter((newsArticle)=>{
                 return(newsArticle!==article);
             })
-            console.log("filtered newses :",filteredNewses);
+           // console.log("filtered newses :",filteredNewses);
             setSavedNewses(filteredNewses);
             handleClick();
         }} />}

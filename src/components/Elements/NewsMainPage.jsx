@@ -70,11 +70,11 @@ export default function NewsMainPage() {
   };
   useEffect(() => {
     const localStorageNewses = JSON.parse(localStorage.getItem("savedNewses"));
-    console.log("local :", localStorageNewses, "state:", savedNewses);
-    console.log(
-      "is equal",
-      JSON.stringify(localStorageNewses) === JSON.stringify(savedNewses)
-    );
+   // console.log("local :", localStorageNewses, "state:", savedNewses);
+    // console.log(
+    //   "is equal",
+    //   JSON.stringify(localStorageNewses) === JSON.stringify(savedNewses)
+    // );
     setAllSavedNewses([...localStorageNewses]);
   }, [Newses, savedNewses]);
 
@@ -100,7 +100,7 @@ export default function NewsMainPage() {
 
   const handleChangeTab = (event, newValue) => {
     setPage(0);
-    console.log("found tab value :", newValue);
+   // console.log("found tab value :", newValue);
     if (newValue === 0) {
       setCategoty("business");
     } else if (newValue === 1) {
@@ -120,7 +120,7 @@ export default function NewsMainPage() {
   };
 
   //console.log("current category :", category);
-  console.log("saved newses are :", savedNewses);
+//  console.log("saved newses are :", savedNewses);
 
   return (
     <>
@@ -147,7 +147,7 @@ export default function NewsMainPage() {
                       onClick={() => {
                         setPage(0);
                         setSearchtext(searchFieldValue);
-                        console.log("search text :", searchFieldValue);
+                      //  console.log("search text :", searchFieldValue);
                         setApiSwitch(!apiSwitch);
                       }}
                       startIcon={<SearchIcon />}

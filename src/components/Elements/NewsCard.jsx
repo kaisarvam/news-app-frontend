@@ -30,7 +30,7 @@ function NewsCard({ article, setSavedNewses, savedNewses }) {
       setOpen(false);
     };
   return (
-    <>
+    <div>
     <Snackbar
         open={open}
         autoHideDuration={6000}
@@ -44,7 +44,7 @@ function NewsCard({ article, setSavedNewses, savedNewses }) {
             const filteredNewses = savedNewses.filter((newsArticle)=>{
                 return(JSON.stringify(newsArticle)!==JSON.stringify(article));
             })
-            console.log("filtered newses :",filteredNewses);
+           // console.log("filtered newses :",filteredNewses);
             setSavedNewses(filteredNewses);
             setNewsSaved(false);
             handleClick();
@@ -72,10 +72,10 @@ function NewsCard({ article, setSavedNewses, savedNewses }) {
         image={article?.urlToImage}
         alt="Paella dish"
       />
-      <CardContent sx={{ minHeight: "230px" }}>
-        <Typography sx={{ marginBottom: "10px" }}>{article?.title}</Typography>
+      <CardContent component="div" sx={{ minHeight: "230px" }}>
+        <Typography component="div" sx={{ marginBottom: "10px" }}>{article?.title}</Typography>
 
-        <Typography variant="body2" color="text.secondary">
+        <Typography component="div" variant="body2" color="text.secondary">
           {parse(article?.description || "")}
         </Typography>
       </CardContent>
@@ -93,7 +93,7 @@ function NewsCard({ article, setSavedNewses, savedNewses }) {
         </Stack>
       </CardActions>
     </Card>
-    </>
+    </div>
   );
 }
 
