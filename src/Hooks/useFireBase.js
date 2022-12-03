@@ -33,7 +33,7 @@ const navigate = useNavigate();
         const user = result.user;
         setUser(user);
         localStorage.setItem("userInfo",JSON.stringify(user));
-        navigate("/home");
+        navigate("/");
         console.log("found user :", user);
       })
       .catch((error) => {
@@ -68,7 +68,7 @@ const navigate = useNavigate();
         setUser(user);
         localStorage.setItem("userInfo",JSON.stringify(user));
         console.log("found login user :", user);
-        navigate("/home");
+        navigate("/");
       })
       .catch((error) => {
         setError(error.code);
@@ -88,7 +88,7 @@ const navigate = useNavigate();
         localStorage.setItem("userInfo",JSON.stringify(user));
 
         console.log("found user created :", user);
-        navigate("/home");
+        navigate("/");
       })
       .catch((error) => {
         //setUserName("");
