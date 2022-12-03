@@ -33,12 +33,12 @@ function NewsCard({ article, setSavedNewses, savedNewses }) {
     <div>
     <Snackbar
         open={open}
-        autoHideDuration={6000}
+        autoHideDuration={4000}
         onClose={handleClose}
         message={newsSaved?"News added on saved news list !!!":"News removed from saved list !!!"}
         // action={action}
       />
-    <Card sx={{ maxWidth: 400, paddingBottom: "20px" }}>
+    <Card sx={{ maxWidth: 450, paddingBottom: "20px" }}>
       <CardHeader
         action={(JSON.stringify(savedNewses).includes(JSON.stringify(article)))?<BookmarkAddedIcon onClick={()=>{
             const filteredNewses = savedNewses.filter((newsArticle)=>{
@@ -62,7 +62,7 @@ function NewsCard({ article, setSavedNewses, savedNewses }) {
             }}
           />
         }
-        title={article?.source?.name}
+        title={article?.source?.name.slice(0,10)}
         subheader={article?.publishedAt}
       />
 

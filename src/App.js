@@ -1,18 +1,26 @@
 import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import FireBaseApp from "./utils/FireBase/firebase.init";
-import { getAuth } from "firebase/auth";
+import LoginPageSide from "./components/Elements/LoginPageSide";
+import SignUpPage from "./components/Elements/SignUpPage";
 import NewsPageHome from "./components/pages/NewsPageHome";
-
-//const auth = getAuth(FireBaseApp);
-//console.log("found auth :",auth)
 
 const queryClient = new QueryClient();
 
 function App() {
-  return <QueryClientProvider client={queryClient}>
-    <NewsPageHome/>
-  </QueryClientProvider>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <div>
+        <BrowserRouter>
+        <Routes>
+          <Route path="/home" element={<NewsPageHome />}></Route>
+          <Route path="/login" element={<LoginPageSide />}></Route>
+          <Route path="/signUp" element={<SignUpPage />}></Route>
+        </Routes>
+        </BrowserRouter>
+      </div>
+    </QueryClientProvider>
+  );
 }
 
 export default App;

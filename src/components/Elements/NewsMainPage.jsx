@@ -13,6 +13,8 @@ import { Stack } from "@mui/system";
 import { Button, ButtonGroup, TextField } from "@mui/material";
 import SavedNewses from "../Elements/Tab/SavedNewses";
 import TabPage from "../Elements/Tab/TabPage";
+import useFireBase from "../../Hooks/useFireBase";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,6 +50,7 @@ function a11yProps(index) {
 }
 
 export default function NewsMainPage() {
+  const { user } = useFireBase();
   const [apiSwitch, setApiSwitch] = useState(true);
   const [value, setValue] = useState(0);
   const [Newses, setNewses] = useState([]);
@@ -66,16 +69,21 @@ export default function NewsMainPage() {
 
   const setSavedNewses = (values) => {
     setAllSavedNewses(values);
-    localStorage.setItem("savedNewses", JSON.stringify(values));
+
+    localStorage.setItem(`${user.email}`, JSON.stringify(values));
   };
   useEffect(() => {
-    const localStorageNewses = JSON.parse(localStorage.getItem("savedNewses"));
-   // console.log("local :", localStorageNewses, "state:", savedNewses);
+    const localStorageNewses = JSON.parse(
+      localStorage.getItem(`${user.email}`)
+    );
+    // console.log("local :", localStorageNewses, "state:", savedNewses);
     // console.log(
     //   "is equal",
     //   JSON.stringify(localStorageNewses) === JSON.stringify(savedNewses)
     // );
-    setAllSavedNewses([...localStorageNewses]);
+    if (localStorageNewses) {
+      setAllSavedNewses([...localStorageNewses]);
+    }
   }, [Newses, savedNewses]);
 
   useQuery(
@@ -100,7 +108,7 @@ export default function NewsMainPage() {
 
   const handleChangeTab = (event, newValue) => {
     setPage(0);
-   // console.log("found tab value :", newValue);
+    // console.log("found tab value :", newValue);
     if (newValue === 0) {
       setCategoty("business");
     } else if (newValue === 1) {
@@ -109,6 +117,12 @@ export default function NewsMainPage() {
       setCategoty("entertainment");
     } else if (newValue === 3) {
       setCategoty("general");
+    } else if (newValue === 4) {
+      setCategoty("health");
+    } else if (newValue === 5) {
+      setCategoty("science");
+    } else if (newValue === 6) {
+      setCategoty("technology");
     }
     setApiSwitch(!apiSwitch);
     setValue(newValue);
@@ -120,7 +134,7 @@ export default function NewsMainPage() {
   };
 
   //console.log("current category :", category);
-//  console.log("saved newses are :", savedNewses);
+  //  console.log("saved newses are :", savedNewses);
 
   return (
     <>
@@ -128,7 +142,7 @@ export default function NewsMainPage() {
       <div
         style={{
           paddingTop: "40px",
-          marginBottom: "40px",
+          marginBottom: "0px",
           display: "flex",
           justifyContent: "center",
         }}
@@ -139,43 +153,45 @@ export default function NewsMainPage() {
             value={searchFieldValue}
             onChange={onTypingSearch}
             label="Search news"
-            InputProps={{
-              endAdornment: (
-                <>
-                  <ButtonGroup variant="contained">
-                    <Button
-                      onClick={() => {
-                        setPage(0);
-                        setSearchtext(searchFieldValue);
-                      //  console.log("search text :", searchFieldValue);
-                        setApiSwitch(!apiSwitch);
-                      }}
-                      startIcon={<SearchIcon />}
-                    >
-                      Search
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        setPage(0);
-                        setSearchtext("");
-                        setSearchFieldValue("");
-                        setApiSwitch(!apiSwitch);
-                      }}
-                      startIcon={<RestartAltIcon />}
-                    >
-                      Reset
-                    </Button>
-                  </ButtonGroup>
-                </>
-              ),
-            }}
           />
+        </Stack>
+        </div>
+        <div style={{width:"95%" , paddingTop: "10px",
+          marginBottom: "40px",
+          display: "flex",
+          justifyContent: "flex-end"}}>
+        <Stack>
+          <ButtonGroup variant="contained">
+            <Button
+              onClick={() => {
+                setPage(0);
+                setSearchtext(searchFieldValue);
+                //  console.log("search text :", searchFieldValue);
+                setApiSwitch(!apiSwitch);
+              }}
+              startIcon={<SearchIcon />}
+            >
+              Search
+            </Button>
+            <Button
+              onClick={() => {
+                setPage(0);
+                setSearchtext("");
+                setSearchFieldValue("");
+                setApiSwitch(!apiSwitch);
+              }}
+              startIcon={<RestartAltIcon />}
+            >
+              Reset
+            </Button>
+          </ButtonGroup>
         </Stack>
       </div>
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            centered
+          <Tabs  
+            variant="scrollable"
+            scrollButtons="auto"
             value={value}
             onChange={handleChangeTab}
             aria-label="basic tabs example"
@@ -185,7 +201,10 @@ export default function NewsMainPage() {
             <Tab label="Sports" {...a11yProps(1)} />
             <Tab label="Entertainment" {...a11yProps(2)} />
             <Tab label="General" {...a11yProps(3)} />
-            <Tab label="Saved" {...a11yProps(4)} />
+            <Tab label="health" {...a11yProps(4)} />
+            <Tab label="science" {...a11yProps(5)} />
+            <Tab label="technology" {...a11yProps(6)} />
+            <Tab label="Saved" {...a11yProps(7)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
@@ -229,6 +248,36 @@ export default function NewsMainPage() {
           />
         </TabPanel>
         <TabPanel value={value} index={4}>
+          <TabPage
+            tabName={"Health News"}
+            Newses={Newses}
+            fetchMoreData={fetchMoreData}
+            totalResults={totalResults}
+            setSavedNewses={setSavedNewses}
+            savedNewses={savedNewses}
+          />
+        </TabPanel>
+        <TabPanel value={value} index={5}>
+          <TabPage
+            tabName={"Science News"}
+            Newses={Newses}
+            fetchMoreData={fetchMoreData}
+            totalResults={totalResults}
+            setSavedNewses={setSavedNewses}
+            savedNewses={savedNewses}
+          />
+        </TabPanel>
+        <TabPanel value={value} index={6}>
+          <TabPage
+            tabName={"Technology News"}
+            Newses={Newses}
+            fetchMoreData={fetchMoreData}
+            totalResults={totalResults}
+            setSavedNewses={setSavedNewses}
+            savedNewses={savedNewses}
+          />
+        </TabPanel>
+        <TabPanel value={value} index={7}>
           <SavedNewses
             tabName={"Saved Newses"}
             savedNewses={savedNewses}

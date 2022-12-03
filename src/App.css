@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  
 }
 
 .App-logo {
@@ -43,4 +44,22 @@
   display: grid;
   align-items: center;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.moveToTop {
+  display: none;
+  border-radius:50%;
+  height: 50px;
+  width: 40px;
+  padding-top: 10px;
+  position: fixed;
+  bottom: 40px;
+  right: 15px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #5e92f3;
+  box-shadow: 0 10px 4px rgb(0 0 0 / 0.3);
+  border-radius: 50%;
 }

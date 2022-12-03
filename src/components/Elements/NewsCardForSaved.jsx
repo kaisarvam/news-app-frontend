@@ -31,12 +31,12 @@ function NewsCardForSaved({ article, setSavedNewses, savedNewses }) {
     <>
     <Snackbar
         open={open}
-        autoHideDuration={6000}
+        autoHideDuration={3000}
         onClose={handleClose}
         message="News removed from saved list !!!"
         // action={action}
       />
-    <Card sx={{ maxWidth: 400, paddingBottom: "20px" }}>
+    <Card sx={{ maxWidth: 450, paddingBottom: "20px" }}>
       <CardHeader
         action={<BookmarkAddedIcon color="primary" onClick={()=>{
             const filteredNewses = savedNewses.filter((newsArticle)=>{
