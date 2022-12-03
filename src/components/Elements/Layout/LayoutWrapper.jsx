@@ -1,5 +1,5 @@
 import React from 'react'
-import ResponsiveAppBar from './ResponsiveAppBar'
+import ResponsiveAppBar from '../ResponsiveAppBar'
 
 function LayoutWrapper({children}) {
   return (

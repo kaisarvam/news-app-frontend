@@ -1,7 +1,7 @@
 import { Container } from "@mui/system";
 import { QueryClient, QueryClientProvider } from "react-query";
 import "./App.css";
-import LayoutWrapper from "./components/Elements/LayoutWrapper";
+import LayoutWrapper from "./components/Elements/Layout/LayoutWrapper";
 import NewsMainPage from "./components/pages/NewsMainPage";
 
 const queryClient = new QueryClient();

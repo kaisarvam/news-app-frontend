@@ -1,17 +1,25 @@
 import {
+    Container,
     Grid,
     Typography,
   } from "@mui/material";
-  import CircularProgress from '@mui/material/CircularProgress';
   import React, { useEffect } from "react";
-  import { Container } from "@mui/system";
-  import InfiniteScroll from "react-infinite-scroll-component";
-import NewsCard from "../Elements/NewsCard";
+  import CircularProgress from '@mui/material/CircularProgress';
   
-  function EntertainmentNews({ Newses, fetchMoreData, totalResults,setSavedNewses,savedNewses }) {
+  import InfiniteScroll from "react-infinite-scroll-component";
+  
+  import NewsCard from "../NewsCard";
+  
+  function TabPage({ Newses, fetchMoreData, totalResults,setSavedNewses,savedNewses ,tabName}) {
     useEffect(() => {}, [Newses]);
     return (
-        <Container maxWidth="xl" style={{ backgroundColor: "#F5EBE0" }}>
+        <>
+         <Typography variant="h3" sx={{ marginBottom: "20px" }}>
+            {" "}
+            {tabName||''}
+          </Typography>
+
+      <Container maxWidth="xl" style={{ backgroundColor: "#F5EBE0" }}>
         <InfiniteScroll
           style={{ width: "100%" }}
           dataLength={Newses.length}
@@ -26,7 +34,7 @@ import NewsCard from "../Elements/NewsCard";
               Newses?.map((article, index) => {
                 return (
                   <Grid item xs={12} sm={6} md={6} lg={4} xl={4} key={index}>
-                  <NewsCard article={article}  setSavedNewses={setSavedNewses} savedNewses={savedNewses}/>
+                   <NewsCard article={article} setSavedNewses={setSavedNewses} savedNewses={savedNewses}/>
                   </Grid>
                 );
               })}
@@ -40,8 +48,9 @@ import NewsCard from "../Elements/NewsCard";
           </Grid>
         )}
       </Container>
+      </>
     );
   }
   
-  export default EntertainmentNews;
+  export default TabPage;
   

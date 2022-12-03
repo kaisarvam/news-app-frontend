@@ -11,11 +11,8 @@ import { getAllNews } from "../../api/NewsApi";
 import { useQuery } from "react-query";
 import { Stack } from "@mui/system";
 import { Button, ButtonGroup, TextField } from "@mui/material";
-import BusinessNews from "./BusinessNews";
-import SportsNews from "./SportsNews";
-import EntertainmentNews from "./EntertainmentNews";
-import GeneralNews from "./GeneralNews";
-import SavedNewses from "./SavedNewses";
+import SavedNewses from "../Elements/Tab/SavedNewses";
+import TabPage from "../Elements/Tab/TabPage";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -54,7 +51,7 @@ export default function NewsMainPage() {
   const [apiSwitch, setApiSwitch] = useState(true);
   const [value, setValue] = useState(0);
   const [Newses, setNewses] = useState([]);
-  const [savedNewses,setAllSavedNewses] = useState([]);
+  const [savedNewses, setAllSavedNewses] = useState([]);
   const [searchText, setSearchtext] = useState("");
   const [searchFieldValue, setSearchFieldValue] = useState("");
   const [country, setCountry] = useState("");
@@ -67,16 +64,19 @@ export default function NewsMainPage() {
     setSearchFieldValue(e.target.value);
   };
 
-  const setSavedNewses =(values)=>{
+  const setSavedNewses = (values) => {
     setAllSavedNewses(values);
-    localStorage.setItem("savedNewses",JSON.stringify(values));
-  }
-    useEffect(() => {
-        const localStorageNewses = JSON.parse(localStorage.getItem("savedNewses"));
-        console.log("local :",localStorageNewses,"state:",savedNewses);
-        console.log("is equal",(JSON.stringify(localStorageNewses)===JSON.stringify(savedNewses)))
-       setAllSavedNewses([...localStorageNewses]);
-    }, [Newses]);
+    localStorage.setItem("savedNewses", JSON.stringify(values));
+  };
+  useEffect(() => {
+    const localStorageNewses = JSON.parse(localStorage.getItem("savedNewses"));
+    console.log("local :", localStorageNewses, "state:", savedNewses);
+    console.log(
+      "is equal",
+      JSON.stringify(localStorageNewses) === JSON.stringify(savedNewses)
+    );
+    setAllSavedNewses([...localStorageNewses]);
+  }, [Newses, savedNewses]);
 
   useQuery(
     ["getAllNews", searchText, apiSwitch],
@@ -120,7 +120,7 @@ export default function NewsMainPage() {
   };
 
   //console.log("current category :", category);
-  console.log("saved newses are :",savedNewses);
+  console.log("saved newses are :", savedNewses);
 
   return (
     <>
@@ -135,7 +135,7 @@ export default function NewsMainPage() {
       >
         <Stack direction="row" sx={{ width: "100%" }} justifyContent="center">
           <TextField
-            sx={{ width: "90%" ,backgroundColor:"#ffffff"}}
+            sx={{ width: "90%", backgroundColor: "#ffffff" }}
             value={searchFieldValue}
             onChange={onTypingSearch}
             label="Search news"
@@ -175,10 +175,11 @@ export default function NewsMainPage() {
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
+            centered
             value={value}
             onChange={handleChangeTab}
             aria-label="basic tabs example"
-            indicatorColor="secondary" 
+            indicatorColor="secondary"
           >
             <Tab type="contained" label="Business" {...a11yProps(0)} />
             <Tab label="Sports" {...a11yProps(1)} />
@@ -188,10 +189,8 @@ export default function NewsMainPage() {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <Typography variant="h3" sx={{ marginBottom: "20px" }}>
-            Business News
-          </Typography>
-          <BusinessNews
+          <TabPage
+            tabName={"Business News"}
             Newses={Newses}
             fetchMoreData={fetchMoreData}
             totalResults={totalResults}
@@ -200,12 +199,8 @@ export default function NewsMainPage() {
           />
         </TabPanel>
         <TabPanel component="div" value={value} index={1}>
-          <Typography variant="h3" sx={{ marginBottom: "20px" }}>
-            {" "}
-            Sports News
-          </Typography>
-
-          <SportsNews
+          <TabPage
+            tabName={"Sports News"}
             Newses={Newses}
             fetchMoreData={fetchMoreData}
             totalResults={totalResults}
@@ -214,12 +209,8 @@ export default function NewsMainPage() {
           />
         </TabPanel>
         <TabPanel component="div" value={value} index={2}>
-          <Typography variant="h3" sx={{ marginBottom: "20px" }}>
-            {" "}
-            Entertainment News
-          </Typography>
-
-          <EntertainmentNews
+          <TabPage
+            tabName={"Entertainment News"}
             Newses={Newses}
             fetchMoreData={fetchMoreData}
             totalResults={totalResults}
@@ -228,11 +219,8 @@ export default function NewsMainPage() {
           />
         </TabPanel>
         <TabPanel value={value} index={3}>
-          <Typography variant="h3" sx={{ marginBottom: "20px" }}>
-            {" "}
-            General News
-          </Typography>
-          <GeneralNews
+          <TabPage
+            tabName={"General News"}
             Newses={Newses}
             fetchMoreData={fetchMoreData}
             totalResults={totalResults}
@@ -241,11 +229,11 @@ export default function NewsMainPage() {
           />
         </TabPanel>
         <TabPanel value={value} index={4}>
-          <Typography variant="h3" sx={{ marginBottom: "20px" }}>
-            {" "}
-            Saved Newses
-          </Typography>
-          <SavedNewses savedNewses={savedNewses} setSavedNewses={setSavedNewses}/>
+          <SavedNewses
+            tabName={"Saved Newses"}
+            savedNewses={savedNewses}
+            setSavedNewses={setSavedNewses}
+          />
         </TabPanel>
       </Box>
     </>
