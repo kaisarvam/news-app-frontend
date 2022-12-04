@@ -1,3 +1,7 @@
+# NEWS APP (News Api)
+
+- News app is a Basic News searching web app , user can view , save and filter newses in this app .
+
 ## 💻 Languages and Tools:
 
 [![Javascript Badge](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://github.com/kaisarvam)
@@ -18,3 +22,13 @@
 - Fetch Newses based on category tabs
 - Support for Country based news filters
 - Has Infinite Scroll Support 
+
+
+## TO RUN LOCALLY
+
+- First clone this repo in your local folder
+- Install dependencys  using yarn / npm
+- please see the included _env_example.txt file and create a .env.local file with those config . this is important
+- now open terminal and type npm start / yarn start
+- if there is no error then you should see this site on your browser in localhost:3000
+- if you see the site but there is no newses then update the provided apikey with a new one , you should be good to go . don,t forget to restart the server  after updating the api key
