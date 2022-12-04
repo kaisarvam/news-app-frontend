@@ -15,7 +15,6 @@ import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import parse from "html-react-parser";
 import { Stack } from "@mui/system";
 import newsPlaceHolder from '../../asset/noPreview.jpg'
-
 function NewsCard({ article, setSavedNewses, savedNewses }) {
   const [newsSaved, setNewsSaved] = useState(false);
   const [open, setOpen] = useState(false);
@@ -82,12 +81,13 @@ function NewsCard({ article, setSavedNewses, savedNewses }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Stack direction="row" sx={{ width: "100%" }} justifyContent="center">
+        <Stack direction="row" sx={{ width: "100%" }} justifyContent="center">       
           <Button
             variant="contained"
             size="small"
             sx={{ width: "100%" }}
-            href={article?.url}
+             href={article?.url}
+             target="_blank"
             endIcon={<ReadMoreIcon />}
           >
             Read More

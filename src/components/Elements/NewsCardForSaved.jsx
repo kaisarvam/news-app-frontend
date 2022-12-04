@@ -70,6 +70,7 @@ function NewsCardForSaved({ article, setSavedNewses, savedNewses }) {
             size="small"
             sx={{ width: "100%" }}
             href={article?.url}
+            target="_blank"
             endIcon={<ReadMoreIcon />}
           >
             Read More
