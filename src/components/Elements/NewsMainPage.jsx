@@ -23,6 +23,8 @@ import ScienceIcon from "@mui/icons-material/Science";
 import DevicesIcon from "@mui/icons-material/Devices";
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import SelectOption from "./SelectOption";
+//import  DatePickerOption  from "./DatePickerOption";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -93,7 +95,7 @@ export default function NewsMainPage() {
   };
   const [category, setCategoty] = useState("business");
   const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(20);
+  const pageSize = 20;
   const [totalResults, setTotalresults] = useState(0);
 
   const onTypingSearch = (e) => {
@@ -117,7 +119,7 @@ export default function NewsMainPage() {
     if (localStorageNewses) {
       setAllSavedNewses([...localStorageNewses]);
     }
-  }, [Newses, savedNewses, user.email]);
+  }, [Newses,user.email]);
 
   useQuery(
     ["getAllNews", searchText, apiSwitch],
@@ -189,6 +191,7 @@ export default function NewsMainPage() {
           />
         </Stack>
       </div>
+      
       <div
         style={{
           width: "95%",
@@ -198,6 +201,9 @@ export default function NewsMainPage() {
           justifyContent: "flex-end",
         }}
       >
+        {/* <div>
+        <DatePickerOption/>
+        </div> */}
         <div style={{ marginTop: "-10px" }}>
           <SelectOption
             selectValue={country}

@@ -11,7 +11,7 @@ function SavedNewses({ savedNewses, setSavedNewses, tabName }) {
         {tabName || ""}
       </Typography>
 
-      <Container maxWidth="xl" style={{ backgroundColor: "#F5EBE0" }}>
+      <Container maxWidth="xl" style={{ backgroundColor: "#F5EBE0",minHeight:"500px" }}>
         <Grid container spacing={4}>
           {savedNewses &&
             savedNewses?.map((article, index) => {
@@ -33,8 +33,8 @@ function SavedNewses({ savedNewses, setSavedNewses, tabName }) {
             justifyContent="center"
             sx={{ marginTop: "40px" }}
           >
-            <Grid item container spacing={4} justifyContent="center">
-              <Typography variant="h3">No content found !!</Typography>
+            <Grid item container spacing={4} justifyContent="center" >
+              <Typography color="error" variant="h3">No Saved News found !!</Typography>
             </Grid>
           </Grid>
         )}

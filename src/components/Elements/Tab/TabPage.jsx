@@ -19,7 +19,7 @@ import {
             {tabName||''}
           </Typography>
 
-      <Container maxWidth="xl" style={{ backgroundColor: "#F5EBE0" }}>
+      <Container maxWidth="xl" style={{ backgroundColor: "#F5EBE0",minHeight:"500px" }}>
         <InfiniteScroll
           style={{ width: "100%" }}
           dataLength={Newses.length}
@@ -42,8 +42,8 @@ import {
         </InfiniteScroll>
         {Newses.length < 1 && (
           <Grid container spacing={4} justifyContent="center" sx={{marginTop:"40px"}}>
-          <Grid item  container spacing={4} justifyContent="center" >
-              <Typography variant="h3">No content found !!</Typography>
+          <Grid item container spacing={4} justifyContent="center" >
+              <Typography color="error" variant="h3">No content found !!</Typography>
             </Grid>
           </Grid>
         )}

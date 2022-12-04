@@ -26,7 +26,7 @@ export default function SelectOption({
         onChange={handleChange}
       >
         {selectValues.map((value) => {
-          return <MenuItem value={value?.value}>{value?.name}</MenuItem>;
+          return <MenuItem value={value?.value} key={value?.name}>{value?.name}</MenuItem>;
         })}
       </Select>
     </FormControl>
