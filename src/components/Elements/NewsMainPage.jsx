@@ -61,7 +61,7 @@ function a11yProps(index) {
 
 export default function NewsMainPage() {
   const { user } = useFireBase();
-  const [apiSwitch, setApiSwitch] = useState(true);
+  const [apiSwitch, setCurrentApiSwitch] = useState(true);
   const [value, setValue] = useState(0);
   const [Newses, setNewses] = useState([]);
   const [savedNewses, setAllSavedNewses] = useState([]);
@@ -89,6 +89,9 @@ export default function NewsMainPage() {
       value: "jp",
     },
   ];
+  const setApiSwitch=(value)=>{
+    setCurrentApiSwitch(value);
+  }
   const setCurrentCountry = (value) => {
     setCountry(value);
     setApiSwitch(!apiSwitch);
@@ -108,6 +111,7 @@ export default function NewsMainPage() {
     localStorage.setItem(`${user.email}`, JSON.stringify(values));
   };
   useEffect(() => {
+    console.log("search Field value :",searchText);
     const localStorageNewses = JSON.parse(
       localStorage.getItem(`${user.email}`)
     );
@@ -119,10 +123,10 @@ export default function NewsMainPage() {
     if (localStorageNewses) {
       setAllSavedNewses([...localStorageNewses]);
     }
-  }, [Newses,user.email]);
+  }, [Newses,user.email,searchText]);
 
   useQuery(
-    ["getAllNews", searchText, apiSwitch],
+    ["getAllNews",apiSwitch],
     () => {
       return axios.get(
         getAllNews(country, category, page, pageSize, searchText)
@@ -137,6 +141,7 @@ export default function NewsMainPage() {
         }
 
         setTotalresults(data?.data?.totalResults);
+        setSearchtext('');
       },
     }
   );
@@ -218,6 +223,7 @@ export default function NewsMainPage() {
               onClick={() => {
                 setPage(0);
                 setSearchtext(searchFieldValue);
+                setSearchFieldValue('');
                 //  console.log("search text :", searchFieldValue);
                 setApiSwitch(!apiSwitch);
               }}
