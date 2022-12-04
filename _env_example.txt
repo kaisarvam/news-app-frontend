@@ -8,3 +8,7 @@ REACT_APP_FIREBASE_PROJECT_ID = news-app-authentication-24916
 REACT_APP_FIREBASE_STORAGE_BUCKET = news-app-authentication-24916.appspot.com
 REACT_APP_FIREBASE_MESSEGING_SENDER_ID = 691955605362
 REACT_APP_FIREBASE_APP_ID = 1:691955605362:web:249facb7a6485e97db87eb
+
+
+use any of these api keys if current one is not working === c761b646168a4dfeac6e49bac788f2cd,4e50579885e6442a9a5427d652d2ff93
+
