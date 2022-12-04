@@ -42,7 +42,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" >
       <Container maxWidth="xl">
       <Toolbar disableGutters>
         <NewspaperIcon sx={{ display: { xs: "none", md: "flex" }, mr: 2,ml:0 }} />

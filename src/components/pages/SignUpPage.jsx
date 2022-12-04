@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
 import useFireBase from "../../Hooks/useFireBase";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -38,6 +39,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUpPage() {
+  const navigate = useNavigate();
   const { user, RegisterUser, GoogleSignIn ,error,setError} = useFireBase();
   const {
     register,
@@ -47,8 +49,11 @@ export default function SignUpPage() {
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
+    if (user.email) {
+      navigate("/");
+    }
     setUserData(user);
-  }, [user]);
+  }, [user,navigate]);
 
   const handleFromSubmit = (data) => {
     const displayName = data.name;

@@ -14,15 +14,15 @@ import { Button, ButtonGroup, TextField } from "@mui/material";
 import SavedNewses from "../Elements/Tab/SavedNewses";
 import TabPage from "../Elements/Tab/TabPage";
 import useFireBase from "../../Hooks/useFireBase";
-import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
-import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
-import LiveTvIcon from '@mui/icons-material/LiveTv';
-import DensitySmallIcon from '@mui/icons-material/DensitySmall';
-import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
-import ScienceIcon from '@mui/icons-material/Science';
-import DevicesIcon from '@mui/icons-material/Devices';
-import BookmarksIcon from '@mui/icons-material/Bookmarks';
-
+import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
+import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
+import LiveTvIcon from "@mui/icons-material/LiveTv";
+import DensitySmallIcon from "@mui/icons-material/DensitySmall";
+import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
+import ScienceIcon from "@mui/icons-material/Science";
+import DevicesIcon from "@mui/icons-material/Devices";
+import BookmarksIcon from "@mui/icons-material/Bookmarks";
+import SelectOption from "./SelectOption";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -66,6 +66,31 @@ export default function NewsMainPage() {
   const [searchText, setSearchtext] = useState("");
   const [searchFieldValue, setSearchFieldValue] = useState("");
   const [country, setCountry] = useState("");
+  const CountryOptions = [
+    {
+      name: "ALL",
+      value: "",
+    },
+    {
+      name: "USA",
+      value: "us",
+    },
+    {
+      name: "Australia",
+      value: "au",
+    },
+    {
+      name: "India",
+      value: "in",
+    }, {
+      name: "Japan",
+      value: "jp",
+    },
+  ];
+  const setCurrentCountry = (value) => {
+    setCountry(value);
+    setApiSwitch(!apiSwitch);
+  };
   const [category, setCategoty] = useState("business");
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(20);
@@ -92,7 +117,7 @@ export default function NewsMainPage() {
     if (localStorageNewses) {
       setAllSavedNewses([...localStorageNewses]);
     }
-  }, [Newses, savedNewses]);
+  }, [Newses, savedNewses, user.email]);
 
   useQuery(
     ["getAllNews", searchText, apiSwitch],
@@ -163,11 +188,24 @@ export default function NewsMainPage() {
             label="Search news"
           />
         </Stack>
-        </div>
-        <div style={{width:"95%" , paddingTop: "10px",
+      </div>
+      <div
+        style={{
+          width: "95%",
+          paddingTop: "10px",
           marginBottom: "40px",
           display: "flex",
-          justifyContent: "flex-end"}}>
+          justifyContent: "flex-end",
+        }}
+      >
+        <div style={{ marginTop: "-10px" }}>
+          <SelectOption
+            selectValue={country}
+            selectValues={CountryOptions}
+            selectLabel={"Country"}
+            setSelectValue={setCurrentCountry}
+          />
+        </div>
         <Stack>
           <ButtonGroup variant="contained">
             <Button
@@ -197,7 +235,7 @@ export default function NewsMainPage() {
       </div>
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs  
+          <Tabs
             variant="scrollable"
             scrollButtons="auto"
             value={value}
@@ -205,16 +243,31 @@ export default function NewsMainPage() {
             aria-label="basic tabs example"
             indicatorColor="secondary"
           >
-            <Tab icon={<BusinessCenterIcon/>} type="contained" label="Business" {...a11yProps(0)} />
-            <Tab icon={<SportsSoccerIcon/>} label="Sports" {...a11yProps(1)} />
-            <Tab icon={<LiveTvIcon/>}
-             label="Entertainment" {...a11yProps(2)} />
-            <Tab  icon={<DensitySmallIcon/>}
-            label="General" {...a11yProps(3)} />
-            <Tab icon={<MedicalServicesIcon/>} label="health" {...a11yProps(4)} />
-            <Tab icon={<ScienceIcon/>} label="science" {...a11yProps(5)} />
-            <Tab icon={<DevicesIcon/>} label="technology" {...a11yProps(6)} />
-            <Tab icon={<BookmarksIcon/>} label="Saved" {...a11yProps(7)} />
+            <Tab
+              icon={<BusinessCenterIcon />}
+              type="contained"
+              label="Business"
+              {...a11yProps(0)}
+            />
+            <Tab icon={<SportsSoccerIcon />} label="Sports" {...a11yProps(1)} />
+            <Tab
+              icon={<LiveTvIcon />}
+              label="Entertainment"
+              {...a11yProps(2)}
+            />
+            <Tab
+              icon={<DensitySmallIcon />}
+              label="General"
+              {...a11yProps(3)}
+            />
+            <Tab
+              icon={<MedicalServicesIcon />}
+              label="health"
+              {...a11yProps(4)}
+            />
+            <Tab icon={<ScienceIcon />} label="science" {...a11yProps(5)} />
+            <Tab icon={<DevicesIcon />} label="technology" {...a11yProps(6)} />
+            <Tab icon={<BookmarksIcon />} label="Saved" {...a11yProps(7)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>

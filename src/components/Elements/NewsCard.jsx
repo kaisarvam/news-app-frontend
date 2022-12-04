@@ -31,7 +31,7 @@ function NewsCard({ article, setSavedNewses, savedNewses }) {
       setOpen(false);
     };
   return (
-    <div>
+    <div >
     <Snackbar
         open={open}
         autoHideDuration={4000}

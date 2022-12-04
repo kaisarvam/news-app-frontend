@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import LoginPageSide from "./components/Elements/LoginPageSide";
-import SignUpPage from "./components/Elements/SignUpPage";
+import LoginPageSide from "./components/pages/LoginPageSide";
+import SignUpPage from "./components/pages/SignUpPage";
 import NewsPageHome from "./components/pages/NewsPageHome";
 
 const queryClient = new QueryClient();

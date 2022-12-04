@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useFireBase from "../../Hooks/useFireBase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -37,6 +38,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function LoginPageSide() {
+  const navigate = useNavigate();
   const {
     EmailPassSignIn,
     GoogleSignOut,
@@ -53,8 +55,11 @@ export default function LoginPageSide() {
   const [userData, setUserData] = React.useState(user);
 
   useEffect(() => {
+    if (user.email) {
+      navigate("/");
+    }
     setUserData(user);
-  }, [user]);
+  }, [user,navigate]);
 
   console.log("user Data :", userData);
   const handleFromSubmit = (data) => {
