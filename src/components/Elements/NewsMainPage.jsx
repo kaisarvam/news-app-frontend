@@ -14,6 +14,14 @@ import { Button, ButtonGroup, TextField } from "@mui/material";
 import SavedNewses from "../Elements/Tab/SavedNewses";
 import TabPage from "../Elements/Tab/TabPage";
 import useFireBase from "../../Hooks/useFireBase";
+import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
+import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
+import LiveTvIcon from '@mui/icons-material/LiveTv';
+import DensitySmallIcon from '@mui/icons-material/DensitySmall';
+import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
+import ScienceIcon from '@mui/icons-material/Science';
+import DevicesIcon from '@mui/icons-material/Devices';
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
 
 
 function TabPanel(props) {
@@ -197,14 +205,16 @@ export default function NewsMainPage() {
             aria-label="basic tabs example"
             indicatorColor="secondary"
           >
-            <Tab type="contained" label="Business" {...a11yProps(0)} />
-            <Tab label="Sports" {...a11yProps(1)} />
-            <Tab label="Entertainment" {...a11yProps(2)} />
-            <Tab label="General" {...a11yProps(3)} />
-            <Tab label="health" {...a11yProps(4)} />
-            <Tab label="science" {...a11yProps(5)} />
-            <Tab label="technology" {...a11yProps(6)} />
-            <Tab label="Saved" {...a11yProps(7)} />
+            <Tab icon={<BusinessCenterIcon/>} type="contained" label="Business" {...a11yProps(0)} />
+            <Tab icon={<SportsSoccerIcon/>} label="Sports" {...a11yProps(1)} />
+            <Tab icon={<LiveTvIcon/>}
+             label="Entertainment" {...a11yProps(2)} />
+            <Tab  icon={<DensitySmallIcon/>}
+            label="General" {...a11yProps(3)} />
+            <Tab icon={<MedicalServicesIcon/>} label="health" {...a11yProps(4)} />
+            <Tab icon={<ScienceIcon/>} label="science" {...a11yProps(5)} />
+            <Tab icon={<DevicesIcon/>} label="technology" {...a11yProps(6)} />
+            <Tab icon={<BookmarksIcon/>} label="Saved" {...a11yProps(7)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>

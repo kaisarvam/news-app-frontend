@@ -14,6 +14,7 @@ import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import parse from "html-react-parser";
 import { Stack } from "@mui/system";
+import newsPlaceHolder from '../../asset/noPreview.jpg'
 
 function NewsCard({ article, setSavedNewses, savedNewses }) {
   const [newsSaved, setNewsSaved] = useState(false);
@@ -62,15 +63,16 @@ function NewsCard({ article, setSavedNewses, savedNewses }) {
             }}
           />
         }
-        title={article?.source?.name.slice(0,10)}
+        title={article?.source?.name?.slice(0,10)}
         subheader={article?.publishedAt}
       />
 
       <CardMedia
+       sx={{backgroundImage:newsPlaceHolder}}
         component="img"
-        height="194"
-        image={article?.urlToImage}
-        alt="Paella dish"
+        height="300"
+        image={article?.urlToImage||newsPlaceHolder}
+        alt={article?.title}
       />
       <CardContent component="div" sx={{ minHeight: "230px" }}>
         <Typography component="div" sx={{ marginBottom: "10px" }}>{article?.title}</Typography>
